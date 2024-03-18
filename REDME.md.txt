@@ -1,0 +1,1 @@
+The project was done by [Lê Tuấn Ngọc](https://github.com/0sym1), in the course of Object Oriented Programming at [ProPTIT](https://proptit.com/).
