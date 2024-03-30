@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane onMousePressed="#clickEven" prefHeight="250.0" prefWidth="190.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="code.proshopping.ProductController">
+   <children>
+      <VBox layoutX="40.0" layoutY="20.0" prefHeight="200.0" prefWidth="235.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane prefHeight="175.0" prefWidth="149.0">
+               <children>
+                  <Label fx:id="nameLabel" layoutX="67.0" layoutY="124.0" prefHeight="32.0" prefWidth="63.0" text="Name">
+                     <font>
+                        <Font size="20.0" />
+                     </font></Label>
+                  <ImageView fx:id="image" fitHeight="100.0" fitWidth="114.0" layoutX="38.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../image/headphone.jpg" />
+                     </image>
+                  </ImageView>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </AnchorPane>
+            <HBox prefHeight="75.0" prefWidth="189.0">
+               <children>
+                  <AnchorPane prefHeight="75.0" prefWidth="107.0">
+                     <children>
+                        <Label fx:id="priceLabel" layoutX="23.0" layoutY="23.0" onMousePressed="#clickEven" text="Price">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane prefHeight="75.0" prefWidth="103.0">
+                     <children>
+                        <Label fx:id="stockLabel" layoutX="27.0" layoutY="23.0" text="Stock">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -1,0 +1,8 @@
+123
+Information: 20/Male
+Balance: 0
+Cart: 
+phone/10
+book/5
+laptop/1000
+Shopping history:

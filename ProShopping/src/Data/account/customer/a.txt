@@ -1,0 +1,6 @@
+b
+Information: 1/Male
+Balance:150
+Cart:
+book/5
+Shopping history:
