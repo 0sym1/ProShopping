@@ -63,6 +63,7 @@ public class LoginController {
     public void signupAction(ActionEvent event) throws IOException {
         FXMLLoader root = new FXMLLoader(this.getClass().getResource("createAccountView.fxml"));
         Scene scene = new Scene(root.load(), 500, 600);
+        stage = new Stage();
         stage.setTitle("Create account");
         stage.setScene(scene);
         stage.show();

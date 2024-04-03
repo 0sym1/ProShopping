@@ -147,7 +147,7 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="117.0" prefWidth="171.0">
                            <children>
-                              <Button layoutX="28.0" layoutY="51.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="114.0" text="Information">
+                              <Button layoutX="28.0" layoutY="51.0" mnemonicParsing="false" onAction="#informationAction" prefHeight="40.0" prefWidth="114.0" text="Information">
                                  <font>
                                     <Font size="16.0" />
                                  </font>

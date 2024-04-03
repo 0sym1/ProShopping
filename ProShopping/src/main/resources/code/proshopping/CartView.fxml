@@ -32,7 +32,7 @@
                      <children>
                         <AnchorPane prefHeight="200.0" prefWidth="250.0">
                            <children>
-                              <Label layoutX="98.0" layoutY="25.0" text="Image">
+                              <Label layoutX="125.0" layoutY="25.0" text="Image">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
@@ -87,17 +87,17 @@
                         <Font size="22.0" />
                      </font>
                   </Label>
-                  <Label layoutX="754.0" layoutY="37.0" text="Total:">
+                  <Label layoutX="697.0" layoutY="37.0" text="Total:">
                      <font>
                         <Font size="25.0" />
                      </font>
                   </Label>
-                  <Button layoutX="968.0" layoutY="33.0" mnemonicParsing="false" text="Buy">
+                  <Button layoutX="968.0" layoutY="33.0" mnemonicParsing="false" onAction="#buyAction" text="Buy">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Button>
-                  <Label fx:id="balanceLabel" layoutX="183.0" layoutY="37.0" prefHeight="36.0" prefWidth="91.0" text="xx">
+                  <Label fx:id="balanceLabel" layoutX="165.0" layoutY="37.0" prefHeight="36.0" prefWidth="91.0" text="xx">
                      <font>
                         <Font size="25.0" />
                      </font>
@@ -107,7 +107,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="toatalLabel" layoutX="831.0" layoutY="37.0" prefHeight="32.0" prefWidth="102.0" text="0">
+                  <Label fx:id="toatalLabel" layoutX="774.0" layoutY="37.0" prefHeight="36.0" prefWidth="163.0" text="0">
                      <font>
                         <Font size="25.0" />
                      </font>

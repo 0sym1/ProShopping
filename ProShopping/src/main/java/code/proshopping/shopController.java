@@ -19,8 +19,7 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
+import java.util.*;
 
 
 public class shopController implements Initializable {
@@ -91,6 +90,20 @@ public class shopController implements Initializable {
         }
     }
 
+    public void choiceBoxSortAction(ActionEvent event){
+        ArrayList<Product> arrayListTmp = productArrayList;
+        if(choiceBoxSort.getValue().equals("High to low")){
+            Collections.sort(arrayListTmp, new Comparator<Product>() {
+                @Override
+                public int compare(Product o1, Product o2) {
+                    return 0;
+                }
+            });
+        }
+        else if(choiceBoxSort.getValue().equals("High to low")){
+
+        }
+    }
     public void rechargeAction(ActionEvent event) throws IOException {
         FXMLLoader root = new FXMLLoader(this.getClass().getResource("RechargeView.fxml"));
         Scene scene = new Scene(root.load(), 1100, 750);
@@ -110,16 +123,19 @@ public class shopController implements Initializable {
         Scene scene = new Scene(root.load(), 1100, 750);
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-//        CartController cartController = root.getController();
-//        cartController.setUsername(username);
-//        cartController.setData();
+        currentStage.setScene(scene);
+        currentStage.show();
+    }
+    public void informationAction(ActionEvent event) throws IOException {
+        FXMLLoader root = new FXMLLoader(this.getClass().getResource("InformationView.fxml"));
+
+        InformationController informationController = new InformationController(username);
+        root.setController(informationController);
+        Scene scene = new Scene(root.load(), 1100, 750);
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         currentStage.setScene(scene);
         currentStage.show();
-
-    }
-    public void informationAction(ActionEvent event){
-
     }
     public void refreshAction(ActionEvent event){
         gridPaneList.getChildren().clear();
@@ -193,52 +209,54 @@ public class shopController implements Initializable {
     }
 
     public void addToCartAction(ActionEvent event) throws IOException {
-        int quantity = Integer.parseInt(quantityTextField.getText());
-        Product product = new Product();
-        product.setProduct(nameProductLabel.getText());
+        if(quantityTextField.getText() != null && !Objects.equals(quantityTextField.getText(), "")){
+            int quantity = Integer.parseInt(quantityTextField.getText());
+            Product product = new Product();
+            product.setProduct(nameProductLabel.getText());
 
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Notification");
-        if(quantity > Integer.parseInt(product.getStock())){
-            alert.setContentText("Quantity exceeds available stock!");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Notification");
+            if(quantity > Integer.parseInt(product.getStock())){
+                alert.setContentText("Quantity exceeds available stock!");
+            }
+            else{
+                alert.setContentText("Product added to cart successfully!");
+
+                ArrayList<String> listStringFile = new ArrayList<>();
+                String line;
+                //them vao gio hang, load vao trong file data customer
+                BufferedReader readerCustomerFile = new BufferedReader(new FileReader("src/Data/account/customer/" + username + ".txt"));
+                while ((line = readerCustomerFile.readLine()) != null){
+                    listStringFile.add(line);
+                }
+                readerCustomerFile.close();
+                listStringFile.add(4, product.getName() + "/" + quantityTextField.getText());
+
+                BufferedWriter writerCustomerFile = new BufferedWriter(new FileWriter("src/Data/account/customer/" + username + ".txt"));
+                for(String newLine : listStringFile){
+                    writerCustomerFile.write(newLine);
+                    writerCustomerFile.newLine();
+                }
+                writerCustomerFile.close();
+
+                listStringFile.clear();
+                //load lai stock trong file
+                BufferedReader readerDataProduct = new BufferedReader(new FileReader("src/Data/product/" + product.getName() + ".txt"));
+                while((line = readerDataProduct.readLine()) != null){
+                    listStringFile.add(line);
+                }
+                readerDataProduct.close();
+                listStringFile.set(1, String.valueOf(Integer.parseInt(product.getStock()) - quantity));
+
+                BufferedWriter writerDataProduct = new BufferedWriter(new FileWriter("src/Data/product/" + product.getName() + ".txt"));
+                for(String newLine : listStringFile){
+                    writerDataProduct.write(newLine);
+                    writerDataProduct.newLine();
+                }
+                writerDataProduct.close();
+            }
+            alert.showAndWait();
         }
-        else{
-            alert.setContentText("Product added to cart successfully!");
-
-            ArrayList<String> listStringFile = new ArrayList<>();
-            String line;
-            //them vao gio hang, load vao trong file data customer
-            BufferedReader readerCustomerFile = new BufferedReader(new FileReader("src/Data/account/customer/" + username + ".txt"));
-            while ((line = readerCustomerFile.readLine()) != null){
-                listStringFile.add(line);
-            }
-            readerCustomerFile.close();
-            listStringFile.add(4, product.getName() + "/" + quantityTextField.getText());
-
-            BufferedWriter writerCustomerFile = new BufferedWriter(new FileWriter("src/Data/account/customer/" + username + ".txt"));
-            for(String newLine : listStringFile){
-                writerCustomerFile.write(newLine);
-                writerCustomerFile.newLine();
-            }
-            writerCustomerFile.close();
-
-            listStringFile.clear();
-            //load lai stock trong file
-            BufferedReader readerDataProduct = new BufferedReader(new FileReader("src/Data/product/" + product.getName() + ".txt"));
-            while((line = readerDataProduct.readLine()) != null){
-                listStringFile.add(line);
-            }
-            readerDataProduct.close();
-            listStringFile.set(1, String.valueOf(Integer.parseInt(product.getStock()) - quantity));
-
-            BufferedWriter writerDataProduct = new BufferedWriter(new FileWriter("src/Data/product/" + product.getName() + ".txt"));
-            for(String newLine : listStringFile){
-                writerDataProduct.write(newLine);
-                writerDataProduct.newLine();
-            }
-            writerDataProduct.close();
-        }
-        alert.showAndWait();
     }
     public void setInformationBar(Product product){
         nameProductLabel.setText(product.getName());
@@ -246,6 +264,35 @@ public class shopController implements Initializable {
         stockLabel.setText(product.getStock());
         ratingsLabel.setText(String.valueOf(product.getRatings()));
         productImageView.setImage(new Image(this.getClass().getResourceAsStream(product.getImageSrc())));
+    }
+
+    public void dispay(ArrayList<Product> arrayList){
+        ClickListener clickListener = product -> setInformationBar(product);
+
+        int column = 0;
+        int row = 1;
+        try {
+            for (int i = 0; i < arrayList.size(); i++) {
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("ProductView.fxml"));
+                AnchorPane anchorPane = fxmlLoader.load();
+
+                ProductController productController = fxmlLoader.getController();
+                productController.setData(arrayList.get(i), clickListener);
+
+                if (column == 3) {
+                    column = 0;
+                    row++;
+                }
+
+                gridPaneList.add(anchorPane, column++, row); //(child,column,row)
+
+                GridPane.setMargin(anchorPane, new Insets(10));
+            }
+        }
+        catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -261,29 +308,6 @@ public class shopController implements Initializable {
 
         ClickListener clickListener = product -> setInformationBar(product);
 
-        int column = 0;
-        int row = 1;
-        try {
-            for (int i = 0; i < productArrayList.size(); i++) {
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("ProductView.fxml"));
-                AnchorPane anchorPane = fxmlLoader.load();
-
-                ProductController productController = fxmlLoader.getController();
-                productController.setData(productArrayList.get(i), clickListener);
-
-                if (column == 3) {
-                    column = 0;
-                    row++;
-                }
-
-                gridPaneList.add(anchorPane, column++, row); //(child,column,row)
-
-                GridPane.setMargin(anchorPane, new Insets(10));
-            }
-        }
-        catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        dispay(productArrayList);
     }
 }

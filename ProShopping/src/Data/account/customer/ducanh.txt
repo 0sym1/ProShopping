@@ -1,0 +1,8 @@
+123
+Information: 18/Male
+Balance:90
+Cart: 
+laptop/1
+keybroad/1
+Shopping history:
+book/1

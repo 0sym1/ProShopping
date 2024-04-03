@@ -9,4 +9,6 @@ public class Customer {
     private String accountBalance;
     private String amountSpent;
     ArrayList<String> purchaseHistory;
+
+
 }

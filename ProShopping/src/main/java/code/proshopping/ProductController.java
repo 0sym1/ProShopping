@@ -6,6 +6,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
+import java.io.IOException;
+
 public class ProductController {
     @FXML
     private Label nameLabel;
@@ -16,7 +18,7 @@ public class ProductController {
     @FXML
     private ImageView image;
     @FXML
-    private void clickEven(MouseEvent mouseEvent){
+    private void clickEven(MouseEvent mouseEvent) throws IOException {
         listener.click(product);
     }
     private ClickListener listener;

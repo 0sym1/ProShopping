@@ -1,6 +1,8 @@
 b
-Information: 1/Male
-Balance:150
+Information: 20/Male
+Balance:500
 Cart:
-book/5
+laptop/10
+keybroad/10
+fan/10
 Shopping history:

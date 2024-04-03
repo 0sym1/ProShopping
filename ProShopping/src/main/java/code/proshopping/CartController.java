@@ -32,6 +32,7 @@ public class CartController implements Initializable {
     ArrayList<Product> productArrayList = new ArrayList<>();
 
     private String username;
+    private final FileProcessing fileProcessing = new FileProcessing();
 
     public void setUsername(String username){
         this.username = username;
@@ -75,6 +76,103 @@ public class CartController implements Initializable {
         stage.show();
     }
 
+    public void buyAction(ActionEvent event) throws IOException {
+        int total = Integer.parseInt(toatalLabel.getText());
+        int balance = fileProcessing.getBalance("src/Data/account/customer/" + username + ".txt");
+
+        balanceLabel.setText(String.valueOf(balance));
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Notification");
+        if(total > balance){
+            alert.setContentText("Account balance insufficient!");
+        }
+        else{
+            alert.setContentText("Successful payment!");
+
+            balance -= total;
+            balanceLabel.setText(String.valueOf(balance));
+            //update balance trong file dataCustomer
+            fileProcessing.updateBalance("src/Data/account/customer/" + username + ".txt", "Balance", String.valueOf(balance));
+            //reset total
+            numberOfProductsLabel.setText("0");
+            toatalLabel.setText("0");
+            //update cart vs shopping history
+
+            for(Node node : vBoxProduct.getChildren()){
+                if(node instanceof AnchorPane anchorPane){
+                    ProductsCartController productsCartController = (ProductsCartController) anchorPane.getUserData();
+                    if(productsCartController.getCheckBox()){
+                        fileProcessing.updateShoppingHistory("src/Data/account/customer/" + username + ".txt", productsCartController.getProduct());
+                        fileProcessing.updateCart("src/Data/account/customer/" + username + ".txt", productsCartController.getProduct());
+                        productArrayList.remove(productsCartController.getProduct());
+                    }
+                }
+            }
+            vBoxProduct.getChildren().clear();
+            display();
+        }
+        alert.showAndWait();
+    }
+
+    public void display(){
+        ClickListener clickListenerDelete = new ClickListener() {
+            @Override
+            public void click(Product product) throws IOException {
+                productArrayList.remove(product);
+                fileProcessing.updateCart("src/Data/account/customer/" + username + ".txt", product);
+                vBoxProduct.getChildren().clear();
+                display();
+            }
+        };
+        ClickListener clickListenerAdd = new ClickListener() {
+            @Override
+            public void click(Product product) throws IOException {
+                BufferedReader readerDataCustomer = new BufferedReader(new FileReader("src/Data/account/customer/" + username + ".txt"));
+                String line;
+                while((line = readerDataCustomer.readLine()) != null){
+                    if(line.contains(product.getName())) break;
+                }
+                String[] part = line.split("/");
+
+                numberOfProductsLabel.setText(String.valueOf(Integer.parseInt(numberOfProductsLabel.getText()) + 1));
+                toatalLabel.setText(String.valueOf(Integer.parseInt(toatalLabel.getText()) + Integer.parseInt(product.getPrice())*Integer.parseInt(part[1])));
+                readerDataCustomer.close();
+            }
+        };
+        ClickListener clickListenerSubtract = new ClickListener() {
+            @Override
+            public void click(Product product) throws IOException {
+                BufferedReader readerDataCustomer = new BufferedReader(new FileReader("src/Data/account/customer/" + username + ".txt"));
+                String line;
+                while((line = readerDataCustomer.readLine()) != null){
+                    if(line.contains(product.getName())) break;
+                }
+                String[] part = line.split("/");
+
+                numberOfProductsLabel.setText(String.valueOf(Integer.parseInt(numberOfProductsLabel.getText()) - 1));
+                toatalLabel.setText(String.valueOf(Integer.parseInt(toatalLabel.getText()) - Integer.parseInt(product.getPrice())*Integer.parseInt(part[1])));
+                readerDataCustomer.close();
+            }
+        };
+
+        try{
+            for(Product product : productArrayList){
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("ProductsCartView.fxml"));
+                AnchorPane anchorPane = fxmlLoader.load();
+
+                ProductsCartController productsCartController = fxmlLoader.getController();
+                productsCartController.setData(product, username,clickListenerAdd, clickListenerSubtract, clickListenerDelete);
+
+                anchorPane.setUserData(productsCartController);
+                vBoxProduct.getChildren().add(anchorPane);
+                VBox.setMargin(anchorPane, new Insets(1));
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -86,6 +184,7 @@ public class CartController implements Initializable {
             }
             String[] part = line.split(":");
             balanceLabel.setText(part[1]);
+            readerDataCustomer.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -95,21 +194,7 @@ public class CartController implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        int row = 0;
-        try{
-            for(Product product : productArrayList){
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("ProductsCartView.fxml"));
-                AnchorPane anchorPane = fxmlLoader.load();
 
-                ProductsCartController productsCartController = fxmlLoader.getController();
-                productsCartController.setData(product, username);
-
-                vBoxProduct.getChildren().add(anchorPane);
-                VBox.setMargin(anchorPane, new Insets(1));
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        display();
     }
 }
