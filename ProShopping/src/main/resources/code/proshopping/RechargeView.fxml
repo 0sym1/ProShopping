@@ -7,32 +7,32 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="code.proshopping.RechargeController">
+<AnchorPane prefHeight="750.0" prefWidth="1100.0" style="-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #0B1E3E, #4E154C); -fx-background-radius: 15;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="code.proshopping.RechargeController">
    <children>
       <VBox layoutX="214.0" layoutY="64.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <AnchorPane prefHeight="305.0" prefWidth="1100.0">
                <children>
-                  <Label layoutX="466.0" layoutY="232.0" text="Recharge">
+                  <Label layoutX="447.0" layoutY="202.0" text="Recharge" textFill="#ababab">
                      <font>
-                        <Font size="41.0" />
+                        <Font size="50.0" />
                      </font>
                   </Label>
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="378.0" prefWidth="1100.0">
                <children>
-                  <TextField fx:id="amount" layoutX="438.0" layoutY="46.0" promptText="Enter the amount">
+                  <TextField fx:id="amount" layoutX="438.0" layoutY="46.0" promptText="Enter the amount" style="-fx-background-color: #787A8F; -fx-background-radius: 15;">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </TextField>
-                  <Button layoutX="598.0" layoutY="117.0" mnemonicParsing="false" onAction="#okAction" prefHeight="31.0" prefWidth="64.0" text="OK">
+                  <Button layoutX="598.0" layoutY="117.0" mnemonicParsing="false" onAction="#okAction" prefHeight="31.0" prefWidth="64.0" style="-fx-background-color: #C0C0C0; -fx-background-radius: 30;" text="OK">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Button>
-                  <Button layoutX="438.0" layoutY="117.0" mnemonicParsing="false" onAction="#cancelAction" text="Cancel">
+                  <Button layoutX="438.0" layoutY="117.0" mnemonicParsing="false" onAction="#cancelAction" style="-fx-background-color: #C0C0C0; -fx-background-radius: 30;" text="Cancel">
                      <font>
                         <Font size="15.0" />
                      </font>

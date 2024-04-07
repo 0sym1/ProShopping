@@ -1,6 +1,8 @@
 package code.proshopping;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 
 public class FileProcessing {
@@ -16,7 +18,7 @@ public class FileProcessing {
         return Integer.parseInt(part[1]);
     }
 
-    public int getBalance(String nameFile) throws IOException {
+    public String getBalance(String nameFile) throws IOException {
         BufferedReader readerData = new BufferedReader(new FileReader(nameFile));
         String line;
         while((line = readerData.readLine()) != null){
@@ -24,7 +26,31 @@ public class FileProcessing {
         }
         String[] part = line.split(":");
 
-        return Integer.parseInt(part[1].trim());
+        return part[1].trim();
+    }
+
+    public String getAge(String nameFile) throws IOException {
+        BufferedReader readerData = new BufferedReader(new FileReader(nameFile));
+        String line;
+        while((line = readerData.readLine()) != null){
+            if(line.contains("Information")) break;
+        }
+        String[] part1 = line.split(":");
+        String[] part2 = part1[1].split("/");
+
+        return part2[0];
+    }
+
+    public String getGender(String nameFile) throws IOException {
+        BufferedReader readerData = new BufferedReader(new FileReader(nameFile));
+        String line;
+        while((line = readerData.readLine()) != null){
+            if(line.contains("Information")) break;
+        }
+        String[] part1 = line.split(":");
+        String[] part2 = part1[1].split("/");
+
+        return part2[1];
     }
 
     public void updateShoppingHistory(String nameFile, Product product) throws IOException {
@@ -106,4 +132,50 @@ public class FileProcessing {
         writerDataCustomer.close();
     }
 
+    public void deleteProduct(Product product) throws IOException {
+        String nameFolder = "src/Data/product";
+        File fileDelete = new File(nameFolder, product.getName() + ".txt");
+        fileDelete.delete();
+    }
+    public void addProduct(Product product){
+        try{
+            BufferedWriter bw = new BufferedWriter(new FileWriter("src/Data/product/" + product.getName() + ".txt"));
+            bw.write(product.getPrice());
+            bw.newLine();
+            bw.write(product.getStock());
+            bw.newLine();
+            bw.write(String.valueOf(product.getRatings()));
+            bw.newLine();
+            bw.write(String.valueOf(product.getPriorityLevel()));
+            bw.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void editProduct(Product product){
+        try{
+            BufferedWriter bw = new BufferedWriter(new FileWriter("src/Data/product/" + product.getName() + ".txt"));
+            bw.write(product.getPrice());
+            bw.newLine();
+            bw.write(product.getStock());
+            bw.newLine();
+            bw.write(String.valueOf(product.getRatings()));
+            bw.newLine();
+            bw.write(String.valueOf(product.getPriorityLevel()));
+            bw.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void addFileImage(File selectFile, Product product){
+        try {
+            // Đường dẫn đích bạn muốn chuyển file đến
+            File destinationFile = new File("src/main/resources/image");
+
+            // Copy file đến đường dẫn đích và đổi tên
+            Files.copy(selectFile.toPath(), destinationFile.toPath().resolve(product.getName() +".png"), StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

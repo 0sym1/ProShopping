@@ -66,19 +66,19 @@ public class CartController implements Initializable {
     public void backAction(ActionEvent event) throws IOException {
         FXMLLoader root = new FXMLLoader(this.getClass().getResource("shopView.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root.load(), 1100, 750);
 
-        shopController shopController = root.getController();
+        shopController shopController = new shopController(username);
         shopController.setUsername(username);
-        shopController.setBalanceLabel();
+        root.setController(shopController);
 
+        Scene scene = new Scene(root.load(), 1100, 750);
         stage.setScene(scene);
         stage.show();
     }
 
     public void buyAction(ActionEvent event) throws IOException {
         int total = Integer.parseInt(toatalLabel.getText());
-        int balance = fileProcessing.getBalance("src/Data/account/customer/" + username + ".txt");
+        int balance = Integer.parseInt(fileProcessing.getBalance("src/Data/account/customer/" + username + ".txt"));
 
         balanceLabel.setText(String.valueOf(balance));
 
@@ -128,31 +128,19 @@ public class CartController implements Initializable {
         ClickListener clickListenerAdd = new ClickListener() {
             @Override
             public void click(Product product) throws IOException {
-                BufferedReader readerDataCustomer = new BufferedReader(new FileReader("src/Data/account/customer/" + username + ".txt"));
-                String line;
-                while((line = readerDataCustomer.readLine()) != null){
-                    if(line.contains(product.getName())) break;
-                }
-                String[] part = line.split("/");
+                int quantity = fileProcessing.getQuantityProduct("src/Data/account/customer/" + username + ".txt", product);
 
                 numberOfProductsLabel.setText(String.valueOf(Integer.parseInt(numberOfProductsLabel.getText()) + 1));
-                toatalLabel.setText(String.valueOf(Integer.parseInt(toatalLabel.getText()) + Integer.parseInt(product.getPrice())*Integer.parseInt(part[1])));
-                readerDataCustomer.close();
+                toatalLabel.setText(String.valueOf(Integer.parseInt(toatalLabel.getText()) + Integer.parseInt(product.getPrice())*quantity));
             }
         };
         ClickListener clickListenerSubtract = new ClickListener() {
             @Override
             public void click(Product product) throws IOException {
-                BufferedReader readerDataCustomer = new BufferedReader(new FileReader("src/Data/account/customer/" + username + ".txt"));
-                String line;
-                while((line = readerDataCustomer.readLine()) != null){
-                    if(line.contains(product.getName())) break;
-                }
-                String[] part = line.split("/");
+                int quantity = fileProcessing.getQuantityProduct("src/Data/account/customer/" + username + ".txt", product);
 
                 numberOfProductsLabel.setText(String.valueOf(Integer.parseInt(numberOfProductsLabel.getText()) - 1));
-                toatalLabel.setText(String.valueOf(Integer.parseInt(toatalLabel.getText()) - Integer.parseInt(product.getPrice())*Integer.parseInt(part[1])));
-                readerDataCustomer.close();
+                toatalLabel.setText(String.valueOf(Integer.parseInt(toatalLabel.getText()) - Integer.parseInt(product.getPrice())*quantity));
             }
         };
 
@@ -177,14 +165,7 @@ public class CartController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            BufferedReader readerDataCustomer = new BufferedReader(new FileReader("src/Data/account/customer/" + username + ".txt"));
-            String line;
-            while ((line = readerDataCustomer.readLine()) != null){
-                if(line.contains("Balance")) break;
-            }
-            String[] part = line.split(":");
-            balanceLabel.setText(part[1]);
-            readerDataCustomer.close();
+            balanceLabel.setText(fileProcessing.getBalance("src/Data/account/customer/" + username + ".txt"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

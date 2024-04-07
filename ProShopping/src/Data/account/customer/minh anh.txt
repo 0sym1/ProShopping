@@ -1,0 +1,6 @@
+123
+Information: 23/Female
+Balance:96000
+Cart: 
+Shopping history:
+dress/20

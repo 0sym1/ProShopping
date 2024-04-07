@@ -7,30 +7,29 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="100.0" prefWidth="745.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="code.proshopping.HistoryProductsController">
+<AnchorPane prefHeight="100.0" prefWidth="745.0" style="-fx-background-color: #534882; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="code.proshopping.HistoryProductsController">
    <children>
-      <ImageView fx:id="image" fitHeight="90.0" fitWidth="90.0" layoutX="63.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="image" fitHeight="75.0" fitWidth="90.0" layoutX="66.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../image/shirt.jpg" />
          </image>
       </ImageView>
-      <Label fx:id="nameLabel" layoutX="278.0" layoutY="35.0" text="Name">
+      <Label fx:id="nameLabel" layoutX="278.0" layoutY="35.0" text="Name" textFill="#ababab">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="priceLabel" layoutX="475.0" layoutY="35.0" text="Price">
+      <Label fx:id="priceLabel" layoutX="475.0" layoutY="35.0" text="Price" textFill="#ababab">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="quantityLabel" layoutX="629.0" layoutY="35.0" text="Quantity">
+      <Label fx:id="quantityLabel" layoutX="629.0" layoutY="35.0" text="Quantity" textFill="#ababab">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Separator layoutY="-2.0" prefWidth="200.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <Separator layoutY="93.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0" />
+      <Separator layoutY="-2.0" opacity="0.5" prefWidth="200.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Separator layoutY="93.0" opacity="0.5" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0" />
    </children>
 </AnchorPane>

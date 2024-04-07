@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="750.0" prefWidth="1100.0" style="-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #1b2c4a, #853682);" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox layoutX="332.0" layoutY="230.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -22,54 +22,54 @@
                         <Image url="@../../image/avatar.jpg" />
                      </image>
                   </ImageView>
-                  <Label layoutX="36.0" layoutY="331.0" text="Username:">
+                  <Label layoutX="36.0" layoutY="331.0" text="Username:" textFill="#ababab">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label layoutX="35.0" layoutY="384.0" text="Age:">
+                  <Label layoutX="35.0" layoutY="384.0" text="Age:" textFill="#ababab">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label layoutX="34.0" layoutY="437.0" text="Gender:">
+                  <Label layoutX="34.0" layoutY="437.0" text="Gender:" textFill="#ababab">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label layoutX="32.0" layoutY="488.0" text="Balance:">
+                  <Label layoutX="32.0" layoutY="488.0" text="Balance:" textFill="#ababab">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label layoutX="32.0" layoutY="541.0" text="Total amount spent:">
+                  <Label layoutX="32.0" layoutY="541.0" text="Total amount spent:" textFill="#ababab">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backAction" text="Back" />
-                  <Label fx:id="usernameLabel" layoutX="152.0" layoutY="331.0" prefHeight="30.0" prefWidth="126.0" text="Label">
+                  <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#backAction" style="-fx-background-color: #C0C0C0; -fx-background-radius: 30;" text="Back" />
+                  <Label fx:id="usernameLabel" layoutX="152.0" layoutY="331.0" prefHeight="30.0" prefWidth="126.0" text="Label" textFill="#ababab">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="ageLabel" layoutX="152.0" layoutY="377.0" prefHeight="30.0" prefWidth="159.0" text="Label">
+                  <Label fx:id="ageLabel" layoutX="152.0" layoutY="384.0" prefHeight="30.0" prefWidth="159.0" text="Label" textFill="#ababab">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
                   <Label layoutX="161.0" layoutY="452.0" />
-                  <Label fx:id="genderLabel" layoutX="152.0" layoutY="437.0" prefHeight="30.0" prefWidth="112.0" text="Label">
+                  <Label fx:id="genderLabel" layoutX="152.0" layoutY="437.0" prefHeight="30.0" prefWidth="112.0" text="Label" textFill="#ababab">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="balanceLabel" layoutX="152.0" layoutY="488.0" prefHeight="30.0" prefWidth="126.0" text="Label">
+                  <Label fx:id="balanceLabel" layoutX="152.0" layoutY="488.0" prefHeight="30.0" prefWidth="126.0" text="Label" textFill="#ababab">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
-                  <Label fx:id="totalAmountSpentLabel" layoutX="224.0" layoutY="541.0" prefHeight="30.0" prefWidth="126.0" text="Label">
+                  <Label fx:id="totalAmountSpentLabel" layoutX="224.0" layoutY="541.0" prefHeight="30.0" prefWidth="126.0" text="Label" textFill="#ababab">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -82,37 +82,38 @@
                      <children>
                         <AnchorPane prefHeight="150.0" prefWidth="750.0">
                            <children>
-                              <Separator layoutX="-4.0" orientation="VERTICAL" prefHeight="163.0" prefWidth="8.0" />
-                              <Label layoutX="281.0" layoutY="14.0" text="Shopping history">
+                              <Separator layoutX="-4.0" opacity="0.5" orientation="VERTICAL" prefHeight="163.0" prefWidth="8.0" />
+                              <Label layoutX="281.0" layoutY="14.0" text="Shopping history" textFill="#ababab">
                                  <font>
                                     <Font size="25.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="88.0" layoutY="116.0" text="Image">
+                              <Label layoutX="88.0" layoutY="116.0" text="Image" textFill="#ababab">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="267.0" layoutY="116.0" text="Name">
+                              <Label layoutX="267.0" layoutY="116.0" text="Name" textFill="#ababab">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="603.0" layoutY="116.0" text="Quantity">
+                              <Label layoutX="603.0" layoutY="116.0" text="Quantity" textFill="#ababab">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="447.0" layoutY="116.0" text="Price">
+                              <Label layoutX="447.0" layoutY="116.0" text="Price" textFill="#ababab">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
                               </Label>
+                              <Separator layoutX="4.0" layoutY="80.0" opacity="0.5" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                            </children>
                         </AnchorPane>
                         <ScrollPane prefHeight="621.0" prefWidth="749.0">
                            <content>
-                              <VBox fx:id="vBoxProducts" prefHeight="100.0" prefWidth="745.0" />
+                              <VBox fx:id="vBoxProducts" prefHeight="595.0" prefWidth="748.0" style="-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #8674cc, #b36bb0);" />
                            </content>
                         </ScrollPane>
                      </children>

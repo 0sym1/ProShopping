@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class RechargeController {
     @FXML
     private TextField amount;
-
+    private FileProcessing fileProcessing = new FileProcessing();
     private String username;
     public void setUsername(String username){
         this.username = username;
@@ -26,42 +26,19 @@ public class RechargeController {
         alert.setContentText("Successfully recharged!");
         alert.showAndWait();
 
-        ArrayList<String> dataCustomer = new ArrayList<>();
-        String line;
-        BufferedReader readerDataCustomer = new BufferedReader(new FileReader("src/Data/account/customer/" + username + ".txt"));
-        while ((line = readerDataCustomer.readLine()) != null){
-            dataCustomer.add(line);
-        }
-        readerDataCustomer.close();
-
-        int indexLine = 0;
-        for(String tmpLine : dataCustomer){
-            if(!tmpLine.contains("Balance:")) indexLine++;
-            else break;
-        }
-        int balance = 0;
-        String[] part = dataCustomer.get(indexLine).split(":");
-        balance = Integer.parseInt(part[1].trim());
-        dataCustomer.set(indexLine, "Balance:" + String.valueOf(balance + Integer.parseInt(amount.getText())));
-
-        BufferedWriter writerDataCustomer = new BufferedWriter(new FileWriter("src/Data/account/customer/" + username + ".txt"));
-        for(String newLine : dataCustomer){
-            writerDataCustomer.write(newLine);
-            writerDataCustomer.newLine();
-        }
-        writerDataCustomer.close();
+        int balance = Integer.parseInt(fileProcessing.getBalance("src/Data/account/customer/" + username + ".txt"));
+        fileProcessing.updateBalance("src/Data/account/customer/" + username + ".txt", "Balance", String.valueOf(balance + Integer.parseInt(amount.getText())));
     }
 
     public void cancelAction(ActionEvent event) throws IOException {
         FXMLLoader root = new FXMLLoader(this.getClass().getResource("shopView.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root.load(), 1100, 750);
 
-        shopController shopController = root.getController();
+        shopController shopController = new shopController(username);
         shopController.setUsername(username);
-        shopController.setBalanceLabel();
+        root.setController(shopController);
 
-        stage.setTitle("ProShopping");
+        Scene scene = new Scene(root.load(), 1100, 750);
         stage.setScene(scene);
         stage.show();
     }

@@ -13,6 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
@@ -31,6 +32,7 @@ public class InformationController implements Initializable {
     @FXML
     private Label totalAmountSpentLabel;
     private String username;
+    private FileProcessing fileProcessing = new FileProcessing();
     @FXML
     private VBox vBoxProducts;
     private ArrayList<Product> productArrayList = new ArrayList<>();
@@ -62,12 +64,12 @@ public class InformationController implements Initializable {
     public void backAction(ActionEvent event) throws IOException {
         FXMLLoader root = new FXMLLoader(this.getClass().getResource("shopView.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root.load(), 1100, 750);
 
-        shopController shopController = root.getController();
+        shopController shopController = new shopController(username);
         shopController.setUsername(username);
-        shopController.setBalanceLabel();
+        root.setController(shopController);
 
+        Scene scene = new Scene(root.load(), 1100, 750);
         stage.setScene(scene);
         stage.show();
     }
@@ -98,11 +100,15 @@ public class InformationController implements Initializable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        usernameLabel.setText(username);
-        ageLabel.setText("");
-        genderLabel.setText("");
-        balanceLabel.setText("");
-        totalAmountSpentLabel.setText("");
+        try{
+            usernameLabel.setText(username);
+            ageLabel.setText(fileProcessing.getAge("src/Data/account/customer/" + username + ".txt"));
+            genderLabel.setText(fileProcessing.getGender("src/Data/account/customer/" + username + ".txt"));
+            balanceLabel.setText(fileProcessing.getBalance("src/Data/account/customer/" + username + ".txt"));
+            totalAmountSpentLabel.setText("");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         display();
     }

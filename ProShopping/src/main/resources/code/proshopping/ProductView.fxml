@@ -1,59 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane onMousePressed="#clickEven" prefHeight="250.0" prefWidth="190.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="code.proshopping.ProductController">
+<AnchorPane onMousePressed="#clickEven" prefHeight="250.0" prefWidth="210.0" style="-fx-background-radius: 30; -fx-background-color: #534882; -fx-effect: dropShadow(three-pass-box,rgba(0,0,0,0.1), 10.0 , 0.0 , 0.0 ,10.0);" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="code.proshopping.ProductController">
    <children>
-      <VBox layoutX="40.0" layoutY="20.0" prefHeight="200.0" prefWidth="235.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox layoutX="41.0" layoutY="-11.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <AnchorPane prefHeight="175.0" prefWidth="149.0">
+            <AnchorPane prefHeight="183.0" prefWidth="210.0">
                <children>
-                  <Label fx:id="nameLabel" layoutX="67.0" layoutY="124.0" prefHeight="32.0" prefWidth="63.0" text="Name">
-                     <font>
-                        <Font size="20.0" />
-                     </font></Label>
-                  <ImageView fx:id="image" fitHeight="100.0" fitWidth="114.0" layoutX="38.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="image" fitHeight="120.0" fitWidth="122.0" layoutX="45.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../image/headphone.jpg" />
+                        <Image url="@../../image/logo%20Pro_2.png" />
                      </image>
                   </ImageView>
+                  <Button fx:id="deleteButton" layoutY="2.0" mnemonicParsing="false" onAction="#deleteAction" style="-fx-background-radius: 30;" text="Delete" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="editButton" layoutX="144.0" layoutY="2.0" mnemonicParsing="false" onAction="#editAction" style="-fx-background-radius: 30;" text="Edit" visible="false" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Button>
+                  <Label fx:id="nameLabel" alignment="CENTER" layoutX="40.0" layoutY="139.0" prefHeight="30.0" prefWidth="130.0" style="-fx-background-color: #808080; -fx-background-radius: 30;" text="name" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Separator layoutX="5.0" layoutY="128.0" opacity="0.5" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                </children>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
             </AnchorPane>
-            <HBox prefHeight="75.0" prefWidth="189.0">
+            <AnchorPane prefHeight="67.0" prefWidth="210.0">
                <children>
-                  <AnchorPane prefHeight="75.0" prefWidth="107.0">
-                     <children>
-                        <Label fx:id="priceLabel" layoutX="23.0" layoutY="23.0" onMousePressed="#clickEven" text="Price">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane prefHeight="75.0" prefWidth="103.0">
-                     <children>
-                        <Label fx:id="stockLabel" layoutX="27.0" layoutY="23.0" text="Stock">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </AnchorPane>
+                  <Label layoutX="7.0" layoutY="14.0" text="Price: " textFill="#ababab" AnchorPane.bottomAnchor="16.66666666666667" AnchorPane.topAnchor="14.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="108.0" layoutY="14.0" text="Stock:" textFill="#ababab">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="priceLabel" layoutX="54.0" layoutY="14.0" prefHeight="17.0" prefWidth="48.0" text="Label" textFill="#ababab">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="stockLabel" layoutX="156.0" layoutY="14.0" text="Label" textFill="#ababab">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <Separator layoutX="14.0" layoutY="-1.0" opacity="0.5" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                  <Separator layoutX="102.0" layoutY="-71.0" opacity="0.5" orientation="VERTICAL" prefHeight="67.0" prefWidth="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" />
                </children>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </HBox>
+            </AnchorPane>
          </children>
       </VBox>
    </children>

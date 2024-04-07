@@ -38,6 +38,7 @@ public class ProductsCartController {
     private ClickListener listenerSubtract;
     private ClickListener listenerDelete;
     private Product product;
+    private FileProcessing fileProcessing = new FileProcessing();
 
     public boolean getCheckBox(){
         return checkBox.isSelected();
@@ -49,20 +50,12 @@ public class ProductsCartController {
     public void setData(Product product, String username ,ClickListener listenerAdd, ClickListener listenerSubtract, ClickListener listenerDelete) throws IOException {
         imageView.setImage(new Image(getClass().getResourceAsStream(product.getImageSrc())));
         nameLabel.setText(product.getName());
-        priceLabel.setText(product.getPrice());
+        priceLabel.setText(product.getPrice() +"$");
         this.listenerAdd = listenerAdd;
         this.listenerSubtract = listenerSubtract;
         this.listenerDelete = listenerDelete;
         this.product = product;
-
-        BufferedReader readerDataCustomer = new BufferedReader(new FileReader("src/Data/account/customer/" + username + ".txt"));
-        String line;
-        while((line = readerDataCustomer.readLine()) != null){
-            if(line.contains(product.getName())) break;
-        }
-        String[] part = line.split("/");
-        quantityLabel.setText(part[1].trim());
-
+        quantityLabel.setText(String.valueOf(fileProcessing.getQuantityProduct("src/Data/account/customer/" + username + ".txt", product)));
     }
 
     public void deleteAction(ActionEvent event) throws IOException {

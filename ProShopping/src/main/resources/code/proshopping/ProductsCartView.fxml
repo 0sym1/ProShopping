@@ -10,23 +10,23 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="80.0" prefWidth="1098.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="code.proshopping.ProductsCartController">
+<AnchorPane prefHeight="80.0" prefWidth="1098.0" style="-fx-background-color: #534882; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="code.proshopping.ProductsCartController">
    <children>
-      <HBox layoutX="273.0" layoutY="-36.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox layoutX="273.0" layoutY="-36.0" prefHeight="100.0" prefWidth="200.0" style="-fx-background-radius: 20;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <AnchorPane prefHeight="94.0" prefWidth="250.0">
                <children>
-                  <ImageView fx:id="imageView" fitHeight="115.0" fitWidth="120.0" layoutX="116.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="imageView" fitHeight="94.0" fitWidth="98.0" layoutX="115.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../image/headphone.jpg" />
                      </image>
                   </ImageView>
-                  <Button layoutX="14.0" layoutY="35.0" mnemonicParsing="false" onAction="#deleteAction" text="Delete" />
+                  <Button layoutX="14.0" layoutY="35.0" mnemonicParsing="false" onAction="#deleteAction" style="-fx-background-color: #C0C0C0; -fx-background-radius: 30;" text="Delete" />
                </children>
             </AnchorPane>
             <AnchorPane prefHeight="94.0" prefWidth="250.0">
                <children>
-                  <Label fx:id="nameLabel" layoutX="98.0" layoutY="32.0" text="Name">
+                  <Label fx:id="nameLabel" layoutX="98.0" layoutY="32.0" text="Name" textFill="#ababab">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -35,7 +35,7 @@
             </AnchorPane>
             <AnchorPane prefHeight="94.0" prefWidth="250.0">
                <children>
-                  <Label fx:id="priceLabel" layoutX="104.0" layoutY="32.0" text="Price">
+                  <Label fx:id="priceLabel" layoutX="104.0" layoutY="32.0" text="Price" textFill="#ababab">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -44,7 +44,7 @@
             </AnchorPane>
             <AnchorPane prefHeight="94.0" prefWidth="250.0">
                <children>
-                  <Label fx:id="quantityLabel" layoutX="85.0" layoutY="32.0" text="Quantity">
+                  <Label fx:id="quantityLabel" layoutX="85.0" layoutY="32.0" text="Quantity" textFill="#ababab">
                      <font>
                         <Font size="21.0" />
                      </font>
@@ -58,7 +58,7 @@
             </AnchorPane>
          </children>
       </HBox>
-      <Separator prefHeight="0.0" prefWidth="1098.0" />
-      <Separator layoutX="435.0" layoutY="93.0" prefHeight="3.0" prefWidth="1098.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="91.0" />
+      <Separator opacity="0.5" prefHeight="0.0" prefWidth="1098.0" AnchorPane.bottomAnchor="91.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <Separator layoutX="435.0" layoutY="93.0" opacity="0.5" prefHeight="3.0" prefWidth="1098.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="91.0" />
    </children>
 </AnchorPane>

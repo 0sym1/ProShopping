@@ -14,7 +14,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -30,7 +29,7 @@ public class shopController implements Initializable {
     @FXML
     private GridPane gridPaneList;
     @FXML
-    private ChoiceBox<String> choiceBoxSort;
+    private ComboBox<String> comboBoxSort;
     @FXML
     private Label nameProductLabel;
     @FXML
@@ -46,7 +45,13 @@ public class shopController implements Initializable {
     @FXML
     private Label balanceLabel;
     @FXML
+    private Button addProductButton;
+    @FXML
     private Button rechargeButton;
+    private String username;
+    private FileProcessing fileProcessing = new FileProcessing();
+    private ArrayList<Product> productArrayList = new ArrayList<>();
+    ObservableList<String> listSort = FXCollections.observableArrayList("High to low", "Low to high");
 
     public String getUsername() {
         return username;
@@ -56,26 +61,10 @@ public class shopController implements Initializable {
         this.username = username;
     }
 
-    private String username;
-    ObservableList<String> listSort = FXCollections.observableArrayList("High to low", "Low to high");
-
-    private ArrayList<Product> productArrayList = new ArrayList<>();
-
-
-    public void setBalanceLabel(){
-        try {
-            BufferedReader readerDataCustomer = new BufferedReader(new FileReader("src/Data/account/customer/" + username + ".txt"));
-            readerDataCustomer.readLine();
-            readerDataCustomer.readLine();
-            String line = readerDataCustomer.readLine();
-            String[] part = line.split(":");
-            String balance = part[1].trim();
-            balanceLabel.setText(balance + "$");
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public shopController(String username){
+        this.username = username;
     }
+
     public void setDataProducts() throws IOException {
         File folderData = new File("src/Data/product");
         File[] filesProduct = folderData.listFiles();
@@ -91,18 +80,26 @@ public class shopController implements Initializable {
     }
 
     public void choiceBoxSortAction(ActionEvent event){
-        ArrayList<Product> arrayListTmp = productArrayList;
-        if(choiceBoxSort.getValue().equals("High to low")){
+        gridPaneList.getChildren().clear();
+        ArrayList<Product> arrayListTmp = new ArrayList<>();
+        arrayListTmp.addAll(productArrayList);
+        if(comboBoxSort.getValue().equals("Low to high")){
             Collections.sort(arrayListTmp, new Comparator<Product>() {
                 @Override
                 public int compare(Product o1, Product o2) {
-                    return 0;
+                    return Integer.parseInt(o1.getPrice()) - Integer.parseInt(o2.getPrice());
                 }
             });
         }
-        else if(choiceBoxSort.getValue().equals("High to low")){
-
+        else if(comboBoxSort.getValue().equals("High to low")){
+            Collections.sort(arrayListTmp, new Comparator<Product>() {
+                @Override
+                public int compare(Product o1, Product o2) {
+                    return Integer.parseInt(o2.getPrice()) - Integer.parseInt(o1.getPrice());
+                }
+            });
         }
+        dispay(arrayListTmp);
     }
     public void rechargeAction(ActionEvent event) throws IOException {
         FXMLLoader root = new FXMLLoader(this.getClass().getResource("RechargeView.fxml"));
@@ -137,43 +134,38 @@ public class shopController implements Initializable {
         currentStage.setScene(scene);
         currentStage.show();
     }
-    public void refreshAction(ActionEvent event){
+    public void refreshAction(ActionEvent event) throws IOException {
+        productArrayList.clear();
+        setDataProducts();
         gridPaneList.getChildren().clear();
+        dispay(productArrayList);
+    }
+    public void addProductButtonAction(ActionEvent event) throws IOException {
+        FXMLLoader root = new FXMLLoader(this.getClass().getResource("AddProductView.fxml"));
+        Scene scene = new Scene(root.load(), 500, 500);
 
-        setInformationBar(productArrayList.get(0));
-
-        ClickListener clickListener = product -> setInformationBar(product);
-
-        int column = 0;
-        int row = 1;
-        try {
-            for (int i = 0; i < productArrayList.size(); i++) {
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("ProductView.fxml"));
-                AnchorPane anchorPane = fxmlLoader.load();
-
-                ProductController productController = fxmlLoader.getController();
-                productController.setData(productArrayList.get(i), clickListener);
-
-                if (column == 3) {
-                    column = 0;
-                    row++;
-                }
-
-                gridPaneList.add(anchorPane, column++, row); //(child,column,row)
-
-                GridPane.setMargin(anchorPane, new Insets(10));
-            }
-        }
-        catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        Stage stage = new Stage();
+        Image icon = new Image(getClass().getResourceAsStream("/image/logohehe.png"));
+        stage.getIcons().add(icon);
+        stage.setTitle("Add Product");
+        stage.setScene(scene);
+        stage.show();
     }
     public void searchAction(ActionEvent event) throws IOException {
         gridPaneList.getChildren().clear();
         String nameProduct = textFieldSearch.getText();
 
         ClickListener clickListener = product -> setInformationBar(product);
+        ClickListener clickListenerDelete = new ClickListener() {
+            @Override
+            public void click(Product product) throws IOException {
+                productArrayList.remove(product);
+                fileProcessing.deleteProduct(product);
+                gridPaneList.getChildren().clear();
+                dispay(productArrayList);
+            }
+        };
+
         int column = 0;
         int row = 1;
         try {
@@ -184,7 +176,7 @@ public class shopController implements Initializable {
                     AnchorPane anchorPane = fxmlLoader.load();
 
                     ProductController productController = fxmlLoader.getController();
-                    productController.setData(product, clickListener);
+                    productController.setData(product, clickListener, clickListenerDelete);
 
                     if (column == 3) {
                         column = 0;
@@ -193,7 +185,7 @@ public class shopController implements Initializable {
 
                     gridPaneList.add(anchorPane, column++, row); //(child,column,row)
 
-                    GridPane.setMargin(anchorPane, new Insets(10));
+                    GridPane.setMargin(anchorPane, new Insets(12));
                 }
             }
             if(gridPaneList.getChildren().isEmpty()){
@@ -260,25 +252,37 @@ public class shopController implements Initializable {
     }
     public void setInformationBar(Product product){
         nameProductLabel.setText(product.getName());
-        priceLabel.setText(product.getPrice());
+        priceLabel.setText(product.getPrice() + "$");
         stockLabel.setText(product.getStock());
-        ratingsLabel.setText(String.valueOf(product.getRatings()));
-        productImageView.setImage(new Image(this.getClass().getResourceAsStream(product.getImageSrc())));
+        ratingsLabel.setText(String.valueOf(product.getRatings()) + "/5");
+        productImageView.setImage(new Image(String.valueOf(this.getClass().getResource(product.getImageSrc()))));
     }
 
     public void dispay(ArrayList<Product> arrayList){
         ClickListener clickListener = product -> setInformationBar(product);
+        ClickListener clickListenerDelete = new ClickListener() {
+            @Override
+            public void click(Product product) throws IOException {
+                productArrayList.remove(product);
+                fileProcessing.deleteProduct(product);
+                gridPaneList.getChildren().clear();
+                dispay(productArrayList);
+            }
+        };
 
         int column = 0;
         int row = 1;
         try {
-            for (int i = 0; i < arrayList.size(); i++) {
+            for (Product product : arrayList) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("ProductView.fxml"));
                 AnchorPane anchorPane = fxmlLoader.load();
 
                 ProductController productController = fxmlLoader.getController();
-                productController.setData(arrayList.get(i), clickListener);
+                productController.setData(product, clickListener, clickListenerDelete);
+                if (username.equals("Admin")) {
+                    productController.setAdminButton();
+                }
 
                 if (column == 3) {
                     column = 0;
@@ -287,7 +291,7 @@ public class shopController implements Initializable {
 
                 gridPaneList.add(anchorPane, column++, row); //(child,column,row)
 
-                GridPane.setMargin(anchorPane, new Insets(10));
+                GridPane.setMargin(anchorPane, new Insets(12));
             }
         }
         catch (IOException e) {
@@ -297,7 +301,7 @@ public class shopController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        choiceBoxSort.setItems(listSort);
+        comboBoxSort.setItems(listSort);
 
         try {
             setDataProducts();
@@ -306,7 +310,13 @@ public class shopController implements Initializable {
         }
         setInformationBar(productArrayList.get(0));
 
-        ClickListener clickListener = product -> setInformationBar(product);
+        try {
+            balanceLabel.setText(fileProcessing.getBalance("src/Data/account/customer/" + username + ".txt") + "$");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        if(username.equals("Admin")) addProductButton.setVisible(true);
 
         dispay(productArrayList);
     }
