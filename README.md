@@ -2,7 +2,7 @@
 
 ###Ứng dụng mua hàng online
 
-##### Author: [TuanNgoc](https://github.com/0sym1)   
+## Author: [TuanNgoc](https://github.com/0sym1)   
 
 ## Demo: [Video demo](https://youtu.be/nHStiMosGO4)
 
@@ -25,6 +25,9 @@
 - Profile: Full JRE
 - Encoding: UTF-8
 
+## UML
+![alt text](<Class Diagram.png>)
+![alt text](<Activity Diagram.png>)
 ### Installation
 Cách cài đặt dự án
 
