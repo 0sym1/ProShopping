@@ -1,5 +1,35 @@
-# Sea Battle
+# ProShopping
 
-Sea Battle is a game for two players. The game is played on four grids, two for each player. The grids are typically square – usually 10×10 – and the individual squares in the grid are identified by letter and number. On one grid the player arranges ships and records the shots by the opponent. On the other grid the player records their own shots.
+###Ứng dụng mua hàng online
 
-The project was done by [Lê Tuấn Ngọc](https://github.com/0sym1), in the course of Object Oriented Programming at [ProPTIT](https://proptit.com/).
+##### Author: [TuanNgoc](https://github.com/0sym1)   
+
+## Demo: [Video demo](https://youtu.be/nHStiMosGO4)
+
+### Screenshots
+![alt text](image.png)
+![alt text](image-1.png)
+![alt text](image-2.png)
+![alt text](image-3.png)
+![alt text](image-4.png)
+### Features
+-	Tìm kiếm, sắp xếp, xem sản phẩm
+-	Thêm sản phẩm vào giỏ hàng và mua sản phẩm
+-	Xem profile và lịch sử mua hang
+-	Đăng nhập, tạo tài khoản và quản lý tài khoản
+-	Thêm, xóa, sửa sản phẩm (Admin)
+
+### Requirements
+- Java 21
+- Source/Binary Format: JDK 21 
+- Profile: Full JRE
+- Encoding: UTF-8
+
+### Installation
+Cách cài đặt dự án
+
+- Clone dự án
+- Chạy class Main.java
+
+### License
+[MIT](https://choosealicense.com/licenses/mit/)

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="750.0" prefWidth="1100.0" style="-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #0B1E3E, #4E154C); -fx-background-radius: 15;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox layoutX="531.0" layoutY="175.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane prefHeight="100.0" prefWidth="1100.0">
+               <children>
+                  <Button layoutX="56.0" layoutY="31.0" mnemonicParsing="false" onAction="#backAction" style="-fx-background-color: #C0C0C0; -fx-background-radius: 30;" text="Back">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Label layoutX="474.0" layoutY="23.0" text="Your cart" textFill="#ababab">
+                     <font>
+                        <Font size="38.0" />
+                     </font>
+                  </Label>
+                  <Separator layoutX="6.0" layoutY="98.0" opacity="0.5" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="80.0" prefWidth="1100.0">
+               <children>
+                  <HBox layoutX="121.0" layoutY="-10.0" prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <AnchorPane prefHeight="200.0" prefWidth="250.0">
+                           <children>
+                              <Label layoutX="125.0" layoutY="25.0" text="Image" textFill="#ababab">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="250.0">
+                           <children>
+                              <Label layoutX="99.0" layoutY="25.0" text="Name" textFill="#ababab">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="250.0">
+                           <children>
+                              <Label layoutX="104.0" layoutY="25.0" text="Price" textFill="#ababab">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="250.0">
+                           <children>
+                              <Label layoutX="87.0" layoutY="25.0" text="Quantity" textFill="#ababab">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+            <ScrollPane prefHeight="460.0" prefWidth="1094.0">
+               <content>
+                  <VBox fx:id="vBoxProduct" prefHeight="443.0" prefWidth="1098.0" style="-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #8674cc, #b36bb0);" />
+               </content>
+            </ScrollPane>
+            <AnchorPane prefHeight="110.0" prefWidth="1100.0">
+               <children>
+                  <Label layoutX="62.0" layoutY="37.0" text="Balance:" textFill="#ababab">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="332.0" layoutY="37.0" text="Number of select products:" textFill="#ababab">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="697.0" layoutY="37.0" text="Total:" textFill="#ababab">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="968.0" layoutY="33.0" mnemonicParsing="false" onAction="#buyAction" style="-fx-background-color: #C0C0C0; -fx-background-radius: 30;" text="Buy">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+                  <Label fx:id="balanceLabel" layoutX="165.0" layoutY="37.0" prefHeight="36.0" prefWidth="91.0" text="xx" textFill="#ababab">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="numberOfProductsLabel" layoutX="606.0" layoutY="38.0" prefHeight="30.0" prefWidth="91.0" text="0" textFill="#ababab">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="toatalLabel" layoutX="774.0" layoutY="37.0" prefHeight="36.0" prefWidth="163.0" text="0" textFill="#ababab">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="500.0" prefWidth="500.0" style="-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #0B1E3E, #4E154C); -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="code.proshopping.AddProductController">
+    <children>
+        <Label layoutX="167.0" layoutY="41.0" text="Add Product" textFill="#ababab">
+            <font>
+                <Font size="30.0" />
+            </font>
+        </Label>
+        <TextField fx:id="nameTextField" layoutX="155.0" layoutY="119.0" prefHeight="32.0" prefWidth="189.0" promptText="Name" style="-fx-background-radius: 15; -fx-background-color: #787A8F;" />
+        <TextField fx:id="priceTextField" layoutX="155.0" layoutY="179.0" prefHeight="32.0" prefWidth="189.0" promptText="Price" style="-fx-background-radius: 15; -fx-background-color: #787A8F;" />
+        <TextField fx:id="stockTextField" layoutX="155.0" layoutY="234.0" prefHeight="32.0" prefWidth="189.0" promptText="Stock" style="-fx-background-radius: 15; -fx-background-color: #787A8F;" />
+        <TextField fx:id="ratingsTextField" layoutX="155.0" layoutY="293.0" prefHeight="32.0" prefWidth="189.0" promptText="Ratings" style="-fx-background-radius: 15; -fx-background-color: #787A8F;" />
+        <TextField fx:id="sourceImageTextField" layoutX="155.0" layoutY="350.0" prefHeight="32.0" prefWidth="189.0" promptText="Source image" style="-fx-background-radius: 15; -fx-background-color: #787A8F;" />
+        <Button layoutX="219.0" layoutY="404.0" mnemonicParsing="false" onAction="#okAction" prefHeight="39.0" prefWidth="61.0" style="-fx-background-radius: 30; -fx-background-color: #C0C0C0;" text="OK">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Button>
+        <Button layoutX="358.0" layoutY="353.0" mnemonicParsing="false" onAction="#selectAction" style="-fx-background-radius: 30; -fx-background-color: #C0C0C0;" text="Select" />
+    </children>
+</AnchorPane>

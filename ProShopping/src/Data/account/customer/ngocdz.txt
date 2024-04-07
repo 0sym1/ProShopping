@@ -1,0 +1,8 @@
+1
+Information: 19/Male
+Balance:800
+Cart: 
+phone/1
+Shopping history:
+keyboard/1
+shirt/1

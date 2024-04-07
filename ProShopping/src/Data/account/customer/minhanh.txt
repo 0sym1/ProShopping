@@ -1,0 +1,6 @@
+minhanh
+Information: 20/Female
+Balance: 0
+Cart: 
+lipstick/1
+Shopping history:

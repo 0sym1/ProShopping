@@ -1,0 +1,12 @@
+b
+Information: 20/Male
+Balance:95800
+Cart:
+book/1
+Shopping history:
+watch/2
+shirt/2
+dress/2
+fan/10
+keyboard/1
+keyboard/5
